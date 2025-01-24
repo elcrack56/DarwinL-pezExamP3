@@ -1,24 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="DarwinLópezExamenP3.MainPage"
-             Title="Darwin López">
+             x:Class="DarwinLópezExamenP3.SegundaPage"
+             Title="Segunda Página - Darwin López">
 
     <StackLayout>
-
-        <Entry x:Name="AeropuertoNombres" Placeholder="Buscar aeropuerto" />
-        <Button Text="Buscar" Clicked="OnBuscarClicked"/>
-        <Button Text="Limpiar" Clicked="OnLimpiarClicked"/>
-
         <ListView x:Name="aeropuertosListView" ItemsSource="{Binding Aeropuertos}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Nombre}" Detail="{Binding Ciudad}" />
+                    <TextCell Text="{Binding Nombre}" 
+                      Detail="{Binding Pais, StringFormat='País: {0}, Latitud: {1}, Longitud: {2}, Correo: {3}, DLopez: {4}'}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
 </ContentPage>
-
-
-    

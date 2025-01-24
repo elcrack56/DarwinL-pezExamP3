@@ -1,25 +1,41 @@
-﻿namespace DarwinLópezExamenP3
+﻿using DarwinLópezExamenP3.ViewModels;
+
+namespace DarwinLópezExamenP3
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+        private readonly MainPageViewModel _viewModel;
 
-        public MainPage()
+        public MainPage(MainPageViewModel viewModel)
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            _viewModel = viewModel;
+            BindingContext = _viewModel;
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private async void OnBuscarClicked(object sender, EventArgs e)
         {
-            count++;
+            var nombreAeropuerto = AeropuertoNombres.Text;
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
+            if (!string.IsNullOrEmpty(nombreAeropuerto))
+            {
+                var aeropuerto = await _viewModel.BuscarAeropuertoAsync(nombreAeropuerto);
+                if (aeropuerto != null)
+                {
+                    // El aeropuerto fue guardado correctamente
+                    await DisplayAlert("Éxito", "Aeropuerto encontrado y guardado.", "OK");
+                }
+                else
+                {
+                    await DisplayAlert("Error", "No se encontró el aeropuerto.", "OK");
+                }
+            }
             else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            {
+                await DisplayAlert("Advertencia", "Por favor ingresa el nombre del aeropuerto.", "OK");
+            }
         }
+
     }
 
-}
+
