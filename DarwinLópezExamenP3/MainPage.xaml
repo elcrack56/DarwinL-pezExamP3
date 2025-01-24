@@ -1,24 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:DarwinLópezExamenP3.ViewModels"
              x:Class="DarwinLópezExamenP3.MainPage"
-             Title="Darwin López">
+             Title="Buscador">
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel />
+    </ContentPage.BindingContext>
 
-    <StackLayout>
-
-        <Entry x:Name="AeropuertoNombres" Placeholder="Buscar aeropuerto" />
-        <Button Text="Buscar" Clicked="OnBuscarClicked"/>
-        <Button Text="Limpiar" Clicked="OnLimpiarClicked"/>
-
-        <ListView x:Name="aeropuertosListView" ItemsSource="{Binding Aeropuertos}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding Nombre}" Detail="{Binding Ciudad}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+    <StackLayout Padding="10">
+        <Entry x:Name="DLopez_SearchEntry" Text="{Binding SearchText}" Placeholder="Ingrese un país" />
+        <Button x:Name="DLopez_BuscarButton" Text="Buscar" Command="{Binding BuscarCommand}" />
+        <Button x:Name="DLopez_LimpiarButton" Text="Limpiar" Command="{Binding LimpiarCommand}" />
+        <Label x:Name="DLopez_ResultLabel" Text="{Binding Result}" />
     </StackLayout>
 </ContentPage>
-
-
     

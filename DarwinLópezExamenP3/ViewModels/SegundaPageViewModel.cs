@@ -1,25 +1,29 @@
-﻿using DarwinLópezExamenP3.Models;
-using DarwinLópezExamenP3.Data;
+﻿using DarwinLópezExamenP3.Data;
+using DarwinLópezExamenP3.Models;
+using DarwinLópezExamenP3.Helpers;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace DarwinLópezExamenP3.ViewModels
 {
-    public class SegundaPageViewModel
+    public class SegundaPageViewModel : BaseViewModel
     {
-        private readonly AeropuertoDatabase _aeropuertoDatabase;
+        private readonly AeropuertoDataBase _database;
 
-        public ObservableCollection<DLopezAeropuerto> Aeropuertos { get; } = new ObservableCollection<DLopezAeropuerto>();
+        public ObservableCollection<DLopezAeropuerto> Aeropuertos { get; }
 
-        public SegundaPageViewModel(AeropuertoDatabase aeropuertoDatabase)
+        public SegundaPageViewModel(AeropuertoDataBase database)
         {
-            _aeropuertoDatabase = aeropuertoDatabase;
+            _database = database;
+            Aeropuertos = new ObservableCollection<DLopezAeropuerto>();
+            _ = CargarAeropuertosAsync();
         }
 
-        public async Task CargarAeropuertosAsync()
+        private async Task CargarAeropuertosAsync()
         {
-            var aeropuertos = await _aeropuertoDatabase.ObtenerAeropuertosAsync();
+            var aeropuertos = await _database.GetAeropuertosAsync();
             Aeropuertos.Clear();
+
             foreach (var aeropuerto in aeropuertos)
             {
                 Aeropuertos.Add(aeropuerto);

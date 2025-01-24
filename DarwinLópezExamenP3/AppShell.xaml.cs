@@ -1,10 +1,18 @@
-﻿namespace DarwinLópezExamenP3
+﻿using DarwinLópezExamenP3.Data;
+
+namespace DarwinLópezExamenP3
 {
     public partial class AppShell : Shell
     {
-        public AppShell()
+        private readonly AeropuertoDataBase _database;
+
+        public AppShell(AeropuertoDataBase database)
         {
             InitializeComponent();
+            _database = database;
+
+            Routing.RegisterRoute(nameof(SegundaPage), typeof(SegundaPage));
         }
     }
 }
+

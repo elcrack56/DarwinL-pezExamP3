@@ -1,48 +1,59 @@
-﻿using DarwinLópezExamenP3.Models;
-using DarwinLópezExamenP3.Services;
+﻿using System.Windows.Input;
 using DarwinLópezExamenP3.Data;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+using DarwinLópezExamenP3.Helpers;
+using DarwinLópezExamenP3.Models;
+using DarwinLópezExamenP3.Services;
 
 namespace DarwinLópezExamenP3.ViewModels
 {
-    public class MainPageViewModel
+    public class MainPageViewModel : BaseViewModel
     {
-        private readonly AeropuertoServices _aeropuertoService;
-        private readonly AeropuertoDatabase _aeropuertoDatabase;
+        private readonly AeropuertoService _aeropuertoService;
+        private readonly AeropuertoDataBase _database;
+        private string _searchText;
+        private string _result;
 
-        public ObservableCollection<DLopezAeropuerto> Aeropuertos { get; } = new ObservableCollection<DLopezAeropuerto>();
-
-        public MainPageViewModel(AeropuertoServices aeropuertoService, AeropuertoDatabase aeropuertoDatabase)
+        public string SearchText
         {
-            _aeropuertoService = aeropuertoService;
-            _aeropuertoDatabase = aeropuertoDatabase;
+            get => _searchText;
+            set => SetProperty(ref _searchText, value);
         }
 
-        public async Task BuscarAeropuertoAsync(string nombreAeropuerto)
+        public string Result
         {
-            var aeropuerto = await _aeropuertoService.ObtenerAeropuertoAsync(nombreAeropuerto);
+            get => _result;
+            set => SetProperty(ref _result, value);
+        }
+
+        public ICommand BuscarCommand { get; }
+        public ICommand LimpiarCommand { get; }
+
+        public MainPageViewModel(AeropuertoDataBase database)
+        {
+            _aeropuertoService = new AeropuertoService();
+            _database = database;
+
+            BuscarCommand = new Command(async () => await BuscarAeropuerto());
+            LimpiarCommand = new Command(() => SearchText = string.Empty);
+        }
+
+        public MainPageViewModel()
+        {
+        }
+
+        private async Task BuscarAeropuerto()
+        {
+            var aeropuerto = await _aeropuertoService.BuscarAeropuertoAsync(SearchText);
             if (aeropuerto != null)
             {
-                aeropuerto.DLopez = "DLopez"; 
-                await _aeropuertoDatabase.GuardarAeropuertoAsync(aeropuerto); 
-                await CargarAeropuertosAsync(); 
+                aeropuerto.DLopez = "DLopez";
+                await _database.SaveAeropuertoAsync(aeropuerto);
+                Result = $"Aeropuerto encontrado: {aeropuerto.Nombre}";
             }
-        }
-
-        public async Task CargarAeropuertosAsync()
-        {
-            var aeropuertos = await _aeropuertoDatabase.ObtenerAeropuertosAsync();
-            Aeropuertos.Clear();
-            foreach (var aeropuerto in aeropuertos)
+            else
             {
-                Aeropuertos.Add(aeropuerto); 
+                Result = "No se encontró ningún aeropuerto.";
             }
-        }
-
-        public void LimpiarAeropuertos()
-        {
-            Aeropuertos.Clear();
         }
     }
 }

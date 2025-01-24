@@ -1,39 +1,24 @@
-﻿using Newtonsoft.Json;
+﻿
+using System.Net.Http.Json;
 using DarwinLópezExamenP3.Models;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Linq;
 
 namespace DarwinLópezExamenP3.Services
 {
-    public class AeropuertoServices
+    public class AeropuertoService
     {
-        private const string BaseUrl = "https://freetestapi.com/api/v1/airports?search=";
+        private readonly HttpClient _httpClient;
 
-        public async Task<DLopezAeropuerto?> ObtenerAeropuertoAsync(string nombreAeropuerto)
+        public AeropuertoService()
         {
-            using var cliente = new HttpClient();
-            var respuesta = await cliente.GetStringAsync($"{BaseUrl}{nombreAeropuerto}&limit=1");
+            _httpClient = new HttpClient();
+        }
 
-            var aeropuertos = JsonConvert.DeserializeObject<List<DLopezAeropuerto>>(respuesta);
+        public async Task<DLopezAeropuerto?> BuscarAeropuertoAsync(string name)
+        {
+            var response = await _httpClient.GetFromJsonAsync<List<DLopezAeropuerto>>(
+                $"https://freetestapi.com/api/v1/airports?search={name}&limit=1");
 
-            if (aeropuertos != null && aeropuertos.Count > 0)
-            {
-                var aeropuerto = aeropuertos.First();
-            
-                return new DLopezAeropuerto
-                {
-                    Nombre = aeropuerto.Nombre,
-                    Latitud = aeropuerto.Latitud,
-                    Longitud = aeropuerto.Longitud,
-                    Email = aeropuerto.Email,
-                    Pais = aeropuerto.Pais, 
-                    DLopez = "DLopez"
-                };
-            }
-
-            return null;  
+            return response?.FirstOrDefault();
         }
     }
 }
-

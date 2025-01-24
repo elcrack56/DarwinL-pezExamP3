@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-       xmlns:local="clr-namespace:DarwinLópezExamenP3"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:pages="clr-namespace:DarwinLópezExamenP3"
        x:Class="DarwinLópezExamenP3.AppShell">
-
     <TabBar>
-        <ShellContent Title="Principal" Icon="icon_home.png" ContentTemplate="{DataTemplate local:MainPage}" />
-
-        <ShellContent Title="Segunda Página" Icon="icon_second.png" ContentTemplate="{DataTemplate local:SegundaPage}" />
+        <ShellContent Title="Buscador" ContentTemplate="{DataTemplate pages:MainPage}" />
+        <ShellContent Title="Aeropuertos" ContentTemplate="{DataTemplate pages:SegundaPage}" />
     </TabBar>
-
 </Shell>

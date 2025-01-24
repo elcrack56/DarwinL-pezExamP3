@@ -1,28 +1,27 @@
-﻿using SQLite;
+﻿
 using DarwinLópezExamenP3.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using SQLite;
 
 namespace DarwinLópezExamenP3.Data
 {
-    public class AeropuertoDatabase
+    public class AeropuertoDataBase
     {
         private readonly SQLiteAsyncConnection _database;
 
-        public AeropuertoDatabase(string dbPath)
+        public AeropuertoDataBase(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
-            _database.CreateTableAsync<DLopezAeropuerto>().Wait();  
+            _database.CreateTableAsync<DLopezAeropuerto>().Wait();
         }
 
-        public Task<int> GuardarAeropuertoAsync(DLopezAeropuerto aeropuerto)
+        public Task<int> SaveAeropuertoAsync(DLopezAeropuerto aeropuerto)
         {
             return _database.InsertAsync(aeropuerto);
         }
 
-        public Task<List<DLopezAeropuerto>> ObtenerAeropuertosAsync()
+        public Task<List<DLopezAeropuerto>> GetAeropuertosAsync()
         {
-            return _database.Table<DLopezAeropuerto>().ToListAsync(); 
+            return _database.Table<DLopezAeropuerto>().ToListAsync();
         }
     }
 }
