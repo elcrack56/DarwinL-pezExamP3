@@ -13,8 +13,8 @@
         <Entry x:Name="Dlopez_entryBusquedas"
                Placeholder="Buscar Aeropuertos"
                Text="{Binding BusquedaText}"
-               BackgroundColor="White"
-               TextColor="Orange"
+               BackgroundColor="Grey"
+               TextColor="Black"
                FontSize="18"
                Margin="0,0,0,10"/>
 
@@ -65,7 +65,7 @@
                             <Label x:Name="Dlopez_labelLatitud"
                                    Text="Latitud"
                                    FontAttributes="Bold"
-                                   TextColor="Green"/>
+                                   TextColor="SkyBlue"/>
                             <Label x:Name="Dlopez_txtLatitud"
                                    Text="{Binding Locacion.Latitude}"
                                    TextColor="Blue"/>
@@ -73,7 +73,7 @@
                             <Label x:Name="Dlopez_labelLongitud"
                                    Text="Longitud"
                                    FontAttributes="Bold"
-                                   TextColor="Green"/>
+                                   TextColor="SkyBlue"/>
                             <Label x:Name="Dlopez_txtLongitud"
                                    Text="{Binding Locacion.Longitude}"
                                    TextColor="Blue"/>
@@ -81,7 +81,7 @@
                             <Label x:Name="Dlopez_labelEmail"
                                    Text="E-mail"
                                    FontAttributes="Bold"
-                                   TextColor="Green"/>
+                                   TextColor="Purple"/>
                             <Label x:Name="Dlopez_txtEmail"
                                    Text="{Binding ContactoInformacion.Correo}"
                                    TextColor="Blue"/>
