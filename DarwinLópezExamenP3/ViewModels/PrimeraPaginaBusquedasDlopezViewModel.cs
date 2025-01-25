@@ -6,13 +6,13 @@ using DarwinLópezExamenP3.Models;
 
 namespace DarwinLópezExamenP3.ViewModels
 {
-    public class PrimeraPaginaBusquedasDlopez : INotifyPropertyChanged
+    public class PrimeraPaginaBusquedasDlopezViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyNombre) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyNombre));
 
-        public ObservableCollection<Aeropuertos> Aeropuertos { get; } = new ObservableCollection<Aeropuertos>();
+        public ObservableCollection<Aeropuertos> Aeropuerto { get; } = new ObservableCollection<Aeropuertos>();
         private HttpClient cliente = new HttpClient();
 
         private SQLiteAsyncConnection database;
@@ -32,7 +32,7 @@ namespace DarwinLópezExamenP3.ViewModels
             }
         }
 
-        public PrimeraPaginaBusquedasDlopez()
+        public PrimeraPaginaBusquedasDlopezViewModel()
         {
             database = new SQLiteAsyncConnection(DbPath);
             InitializeDatabase();
@@ -46,7 +46,7 @@ namespace DarwinLópezExamenP3.ViewModels
         public Command BuscarAeropuertoCommand => new Command(async () => await BuscarAeropuerto());
         public Command LimpiarCommand => new Command(() =>
         {
-            Aeropuertos.Clear();
+            Aeropuerto.Clear();
             BusquedaText = string.Empty;
         });
 
@@ -65,9 +65,9 @@ namespace DarwinLópezExamenP3.ViewModels
 
             if (aeropuertosDS != null && aeropuertosDS.Count > 0)
             {
-                Aeropuertos.Clear();
+                Aeropuerto.Clear();
                 var aeropuertoLE = aeropuertosDS[0];
-                Aeropuertos.Add(aeropuertoLE);
+                Aeropuerto.Add(aeropuertoLE);
 
                 var DLaeropuerto = new DLopezAeropuerto
                 {
