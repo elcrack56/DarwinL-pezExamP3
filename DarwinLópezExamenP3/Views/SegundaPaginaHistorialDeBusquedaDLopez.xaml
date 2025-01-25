@@ -31,7 +31,7 @@
                             <Label x:Name="Dlopez_labelAeropuertos"
                                    Text="{Binding}"
                                    FontSize="18"
-                                   TextColor="Black"
+                                   TextColor="White"
                                    LineBreakMode="TailTruncation" />
                         </StackLayout>
                     </Frame>

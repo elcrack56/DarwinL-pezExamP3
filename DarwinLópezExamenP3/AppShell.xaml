@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:DarwinLópezExamenP3"
     xmlns:views="clr-namespace:DarwinLópezExamenP3.Views"
     Shell.FlyoutBehavior="Disabled"
-    Title="ExamenP3HerreraDilan">
+    Title="DarwinLópezExamenP3">
 
     <TabBar>
         <ShellContent Title="Buscar Aeropuerto" ContentTemplate="{DataTemplate views:PrimeraPaginaBusquedasAeropuertoDLopez}" />
