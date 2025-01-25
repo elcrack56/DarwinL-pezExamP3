@@ -1,10 +1,17 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:pages="clr-namespace:DarwinLópezExamenP3"
-       x:Class="DarwinLópezExamenP3.AppShell">
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="DarwinLópezExamenP3.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:DarwinLópezExamenP3"
+    xmlns:views="clr-namespace:DarwinLópezExamenP3.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Title="ExamenP3HerreraDilan">
+
     <TabBar>
-        <ShellContent Title="Buscador" ContentTemplate="{DataTemplate pages:MainPage}" />
-        <ShellContent Title="Aeropuertos" ContentTemplate="{DataTemplate pages:SegundaPage}" />
+        <ShellContent Title="Buscar Aeropuerto" ContentTemplate="{DataTemplate views:PrimeraPaginaBusquedasAeropuertoDLopez}" />
+        <ShellContent Title="Historial de Busqueda" ContentTemplate="{DataTemplate views:SegundaPaginaHistorialDeBusquedaDLopez}" />
     </TabBar>
+
 </Shell>
+

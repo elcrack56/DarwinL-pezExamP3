@@ -43,7 +43,7 @@ namespace DarwinLópezExamenP3.ViewModels
             await database.CreateTableAsync<DLopezAeropuerto>();
         }
 
-        public Command BuscarAeropuertoCommand => new Command(async () => await BuscarAeropuerto());
+        public Command BuscarCommand => new Command(async () => await BuscarAeropuerto());
         public Command LimpiarCommand => new Command(() =>
         {
             Aeropuerto.Clear();

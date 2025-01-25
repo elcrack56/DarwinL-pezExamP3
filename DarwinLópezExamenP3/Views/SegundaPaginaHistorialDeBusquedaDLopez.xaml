@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:DarwinLópezExamenP3.ViewModels"
+             x:Class="DarwinLópezExamenP3.Views.SegundaPaginaHistorialDeBusquedaDLopez"
+             Title="Darwin López">
+
+    <ContentPage.BindingContext>
+        <vm:SegundaPaginaHistorialesAeropuertoDLopezViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout Padding="20" Spacing="15">
+
+        <Label x:Name="Dlopez_labelTitulo"
+               Text="Historial de Busqueda"
+               FontSize="24"
+               FontAttributes="Bold"
+               TextColor="Green"
+               HorizontalOptions="Center" />
+
+        <CollectionView x:Name="Dlopez_listaAeropuertos"
+                        ItemsSource="{Binding Historial}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame x:Name="Dlopez_frameAeropuertos"
+                           BackgroundColor="Blue"
+                           CornerRadius="10"
+                           Padding="15"
+                           Margin="0,5">
+                        <StackLayout x:Name="Dlopez_stackAeropuertos">
+                            <Label x:Name="Dlopez_labelAeropuertos"
+                                   Text="{Binding}"
+                                   FontSize="18"
+                                   TextColor="Black"
+                                   LineBreakMode="TailTruncation" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </StackLayout>
+</ContentPage>

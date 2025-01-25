@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:DarwinLópezExamenP3.ViewModels"
+             x:Class="DarwinLópezExamenP3.Views.PrimeraPaginaBusquedasAeropuertoDLopez">
+
+    <ContentPage.BindingContext>
+    <vm:PrimeraPaginaBusquedasDlopezViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout Padding="20" Spacing="15">
+
+        <Entry x:Name="Dlopez_entryBusquedas"
+               Placeholder="Buscar Aeropuertos"
+               Text="{Binding BusquedaText}"
+               BackgroundColor="White"
+               TextColor="Orange"
+               FontSize="18"
+               Margin="0,0,0,10"/>
+
+        <StackLayout Orientation="Horizontal" Spacing="10">
+            <Button x:Name="Dlopez_btnBuscar"
+                    Text="Buscar"
+                    Command="{Binding BuscarCommand}"
+                    BackgroundColor="Green"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    Padding="10"/>
+
+            <Button x:Name="Dlopez_btnLimpiar"
+                    Text="Limpiar"
+                    Command="{Binding LimpiarCommand}"
+                    BackgroundColor="Red"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    Padding="10"/>
+        </StackLayout>
+
+        <CollectionView x:Name="Dlopez_listaAeropuertos"
+                        ItemsSource="{Binding Aeropuerto}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="White"
+                           CornerRadius="10"
+                           Padding="15"
+                           Margin="0,5" >
+                        <StackLayout>
+
+                            <Label x:Name="Dlopez_labelNombre"
+                                   Text="{Binding Nombre}"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="Black" />
+
+                            <Label x:Name="Dlopez_labelPais"
+                                   Text="Pais"
+                                   FontAttributes="Bold"
+                                   TextColor="Green"/>
+                            <Label x:Name="Dlopez_txtPais"
+                                   Text="{Binding Ciudad}"
+                                   TextColor="Blue"/>
+
+                            <Label x:Name="Dlopez_labelLatitud"
+                                   Text="Latitud"
+                                   FontAttributes="Bold"
+                                   TextColor="Green"/>
+                            <Label x:Name="Dlopez_txtLatitud"
+                                   Text="{Binding Locacion.Latitude}"
+                                   TextColor="Blue"/>
+
+                            <Label x:Name="Dlopez_labelLongitud"
+                                   Text="Longitud"
+                                   FontAttributes="Bold"
+                                   TextColor="Green"/>
+                            <Label x:Name="Dlopez_txtLongitud"
+                                   Text="{Binding Locacion.Longitude}"
+                                   TextColor="Blue"/>
+
+                            <Label x:Name="Dlopez_labelEmail"
+                                   Text="E-mail"
+                                   FontAttributes="Bold"
+                                   TextColor="Green"/>
+                            <Label x:Name="Dlopez_txtEmail"
+                                   Text="{Binding ContactoInformacion.Correo}"
+                                   TextColor="Blue"/>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </StackLayout>
+</ContentPage>
